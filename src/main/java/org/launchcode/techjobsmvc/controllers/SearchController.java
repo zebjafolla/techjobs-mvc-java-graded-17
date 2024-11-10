@@ -23,29 +23,32 @@ import static org.launchcode.techjobsmvc.models.JobData.findByColumnAndValue;
 @RequestMapping("search")
 public class SearchController {
 
-    @GetMapping(value = "")
+    @GetMapping("")
     public String search(Model model) {
         model.addAttribute("columns", columnChoices);
-        return "search";
+        return "/search";
     }
 
     //
 
 //
-    @PostMapping("")
+    @PostMapping("results")
     public String displaySearchResults (Model model, @RequestParam String searchType, @RequestParam String searchTerm) {
         ArrayList <Job> jobs;
-        if (searchType.equals("all") || searchType.isEmpty())
+        if (searchType.isEmpty())
         {
             jobs = JobData.findAll();
         }
+        else if(searchType.equals("all")){
+            jobs = JobData.findByValue(searchTerm);
+        }
         else {
-            jobs = JobData.findByColumnAndValue(searchType,  searchTerm);
+            jobs = JobData.findByColumnAndValue(searchType, searchTerm);
         }
         model.addAttribute("jobs", jobs);
         model.addAttribute("columns", columnChoices);
 
-        return "search";
+        return "/search";
 
     }
 
