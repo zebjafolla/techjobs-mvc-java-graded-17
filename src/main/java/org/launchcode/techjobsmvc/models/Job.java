@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class Job {
 
-    private int id;
+    private final int id;
     private static int nextId = 1;
 
     private String name;
@@ -62,8 +62,7 @@ public class Job {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Job)) return false;
-        Job job = (Job) o;
+        if (!(o instanceof Job job)) return false;
         return id == job.id;
     }
 

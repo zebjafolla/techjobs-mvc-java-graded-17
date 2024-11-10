@@ -23,10 +23,10 @@ public class JobData {
     private static boolean isDataLoaded = false;
 
     private static ArrayList<Job> allJobs;
-    private static ArrayList<Employer> allEmployers = new ArrayList<>();
-    private static ArrayList<Location> allLocations = new ArrayList<>();
-    private static ArrayList<PositionType> allPositionTypes = new ArrayList<>();
-    private static ArrayList<CoreCompetency> allCoreCompetency = new ArrayList<>();
+    private static final ArrayList<Employer> allEmployers = new ArrayList<>();
+    private static final ArrayList<Location> allLocations = new ArrayList<>();
+    private static final ArrayList<PositionType> allPositionTypes = new ArrayList<>();
+    private static final ArrayList<CoreCompetency> allCoreCompetency = new ArrayList<>();
 
     /**
      * Fetch list of all job objects from loaded data,
@@ -59,7 +59,7 @@ public class JobData {
 
         ArrayList<Job> jobs = new ArrayList<>();
 
-        if (value.toLowerCase().equals("all")){
+        if (value.equalsIgnoreCase("all")){
             return findAll();
         }
 
@@ -129,7 +129,7 @@ public class JobData {
 
     private static Object findExistingObject(ArrayList list, String value){
         for (Object item : list){
-            if (item.toString().toLowerCase().equals(value.toLowerCase())){
+            if (item.toString().equalsIgnoreCase(value)){
                 return item;
             }
         }
